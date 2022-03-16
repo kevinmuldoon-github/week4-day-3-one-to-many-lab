@@ -12,3 +12,8 @@ def books():
     books = book_repository.select_all()
     return render_template("books/index.html" , all_books = books)
 
+@books_blueprint.route("/books/<id>/delete" , methods = ['POST']) # Function to delete a book when a user presses delete button
+def delete_book(id):
+    book_repository.delete(id)
+    return redirect ('/books') # Redirect user to the books index page
+    
