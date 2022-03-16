@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
+<h2>Book List</h2>
 {% for book in all_books %}
 <div class="book">
     <div class="content">
+
         <a href="/books/{{book.id}}">{{book.title}}</a>
         by {{book.author.first_name}} {{book.author.last_name}}
         <div class="description">
@@ -19,5 +21,16 @@
     </div>
 </div>
 {% endfor %}
+
+<h2>Author List</h2>
+<div class="author"></div>
+<ul>
+    {% for author in all_authors %}
+    <li>{{author.first_name}} {{author.last_name}}</li>
+    {% endfor %}
+</ul>
+</div>
+
+
 
 {% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="/books/{{book.id}}" method="post">
+
+    <div>
+        <label for="title">Title of Book:</label>
+        <input type="text" id="title" name="title" value="{{book.title}}" placeholder="Title of Book" required autofocus>
+    </div>
+
+    <div>
+        <label for="author_id">Book Author:</label>
+        <select id="author_id" name="author_id">
+            {% for author in all_authors %}
+            <option value="{{author.id}}"
+                {% if book.author.id==author.id %} selected="selected" {% endif %}>
+                {{author.first_name}} {{author.last_name}}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+    <p>Please <a href="/books/new_author">add the book's author</a> if it has not yet been added to our database.</p>
+
+    <div>
+        <label for="blurb">Book Description:</label>
+        <input type="text" id="blurb" name="blurb" value="{{book.blurb}}" placeholder="Book Description (Blurb)" required autofocus>
+    </div>
+
+    <div>
+        <label for="price">Book Price:</label>
+        <input type="text" id="price" name="price" value="{{book.price}}" placeholder="Book Price" required autofocus>
+    </div>
+
+    <button type="submit">Update Book</button>
+
+    </form>
+
+{% endblock %}
