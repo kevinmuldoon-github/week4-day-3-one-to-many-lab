@@ -13,5 +13,5 @@ CREATE TABLE books (
     title VARCHAR(255),
     author_id INT REFERENCES authors(id),
     blurb VARCHAR(255),
-    price INT
+    price FLOAT
 );

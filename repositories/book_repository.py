@@ -6,7 +6,7 @@ from models.book import Book
 import repositories.author_repository as author_repository
 
 def save(book):
-    sql = "INSERT INTO books (title, author, blurb, price) VALUES (%s, %s, %s, %s)  RETURNING *"
+    sql = "INSERT INTO books (title, author_id, blurb, price) VALUES (%s, %s, %s, %s) RETURNING *"
     values = [book.title , book.author.id, book.blurb, book.price]
     results = run_sql(sql, values)
     id = results[0]['id']
@@ -31,7 +31,7 @@ def select(id):
     sql = "SELECT * FROM books WHERE id = %s"
     values = [id]
 
-    result = run_sql(sql,values)
+    result = run_sql(sql,values)[0]
 
     if result is not None:
         author = author_repository.select(result['author_id'])
@@ -48,7 +48,7 @@ def delete(id):
     run_sql(sql,value)
 
 def update(book):
-    sql = "UPDATE books SET (title,author, blurb, price) = (%s, %s, %s, %s) WHERE id = %s"
+    sql = "UPDATE books SET (title,author_id, blurb, price) = (%s, %s, %s, %s) WHERE id = %s"
     values = [book.title , book.author.id , book.blurb , book.price , book.id]
 
     run_sql(sql, values)
